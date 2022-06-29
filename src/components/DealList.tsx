@@ -3,22 +3,17 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import DealItem, { DealItemProps } from './DealItem';
 
 type DealListProps = {
-	deals: Array<DealItemProps>;
+	deals: Array<DealItemProps['deal']>;
+	onItemPress: (dealID: string) => void;
 };
 
-const DealList = ({ deals }: DealListProps) => {
+const DealList = ({ deals, onItemPress }: DealListProps) => {
 	return (
 		<View style={styles.list}>
 			<FlatList
 				data={deals}
 				renderItem={({ item }) => (
-					<DealItem
-						cause={item.cause}
-						dealKey={item.dealKey}
-						media={item.media}
-						price={item.price}
-						title={item.title}
-					/>
+					<DealItem deal={item} onPress={onItemPress} />
 				)}
 			/>
 		</View>

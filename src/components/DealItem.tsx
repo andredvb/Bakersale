@@ -1,29 +1,37 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { priceDisplay } from '../priceDisplay';
 
-export type DealItemProps = {
-	cause: {
-		name: string;
+export interface DealItemProps {
+	deal: {
+		cause: {
+			name: string;
+		};
+		key: string;
+		media: Array<string>;
+		price: number;
+		title: string;
 	};
-	dealKey: string;
-	media: Array<string>;
-	price: number;
-	title: string;
-};
+	onPress: (dealID: string) => void;
+}
 
-const DealItem = ({ cause, dealKey, media, price, title }: DealItemProps) => {
+const DealItem = ({ deal, onPress }: DealItemProps) => {
+	const handlePress = () => {
+		return;
+	};
 	return (
-		<View style={styles.container}>
-			<Image style={styles.image} source={{ uri: media[0] }} />
+		<TouchableOpacity
+			style={styles.container}
+			onPress={() => onPress(deal.key)}>
+			<Image style={styles.image} source={{ uri: deal.media[0] }} />
 			<View style={styles.info}>
-				<Text style={styles.title}>{title}</Text>
+				<Text style={styles.title}>{deal.title}</Text>
 				<View style={styles.footerContainer}>
-					<Text style={styles.cause}>{cause.name}</Text>
-					<Text style={styles.price}>{priceDisplay(price)}</Text>
+					<Text style={styles.cause}>{deal.cause.name}</Text>
+					<Text style={styles.price}>{priceDisplay(deal.price)}</Text>
 				</View>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 };
 
