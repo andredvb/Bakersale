@@ -12,17 +12,12 @@ export interface DealItemProps {
 		price: number;
 		title: string;
 	};
-	onPress: (dealID: string) => void;
+	onPress?: (dealID: string | null) => void;
 }
 
 const DealItem = ({ deal, onPress }: DealItemProps) => {
-	const handlePress = () => {
-		return;
-	};
 	return (
-		<TouchableOpacity
-			style={styles.container}
-			onPress={() => onPress(deal.key)}>
+		<TouchableOpacity style={styles.container} onPress={() => onPress!(deal.key)}>
 			<Image style={styles.image} source={{ uri: deal.media[0] }} />
 			<View style={styles.info}>
 				<Text style={styles.title}>{deal.title}</Text>
@@ -38,7 +33,6 @@ const DealItem = ({ deal, onPress }: DealItemProps) => {
 const styles = StyleSheet.create({
 	container: {
 		margin: 10,
-		flex: 1,
 	},
 	title: {
 		fontSize: 14,

@@ -4,7 +4,7 @@ import DealItem, { DealItemProps } from './DealItem';
 
 type DealListProps = {
 	deals: Array<DealItemProps['deal']>;
-	onItemPress: (dealID: string) => void;
+	onItemPress: (dealID: string | null) => void;
 };
 
 const DealList = ({ deals, onItemPress }: DealListProps) => {
@@ -12,9 +12,7 @@ const DealList = ({ deals, onItemPress }: DealListProps) => {
 		<View style={styles.list}>
 			<FlatList
 				data={deals}
-				renderItem={({ item }) => (
-					<DealItem deal={item} onPress={onItemPress} />
-				)}
+				renderItem={({ item }) => <DealItem deal={item} onPress={onItemPress} />}
 			/>
 		</View>
 	);
@@ -23,9 +21,7 @@ const DealList = ({ deals, onItemPress }: DealListProps) => {
 const styles = StyleSheet.create({
 	list: {
 		backgroundColor: '#eee',
-		flex: 1,
 		width: '100%',
-		paddingTop: 50,
 	},
 });
 
